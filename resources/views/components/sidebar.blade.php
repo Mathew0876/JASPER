@@ -1,4 +1,3 @@
-<!--Sidebar button-->
 <!--Sidebar-->
 <div class="bg-jasper-gray space-y-10 top-0 left-0 w-64 h-full ">
     <div class="space-y-4">
