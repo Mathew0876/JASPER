@@ -6,6 +6,11 @@
             </a>
         </x-slot>
 
+        <!-- JASPER Logo -->
+        <div class="m-2 p-4 flex justify-center items-center">
+          <img class="h-10 w-15" src='../../images/Logo.PNG'>
+          <h1 class="text-white text-4xl font-sans-roboto font-bold">JASPER</h1>
+        </div>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -46,7 +51,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                <a class="underline text-sm text-gray-200 hover:text-gray-400" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
