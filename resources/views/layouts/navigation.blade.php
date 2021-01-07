@@ -1,8 +1,8 @@
 <!--Sidebar-->
-<div class="space-y-10" style="position: absolute; width: 272px; height: 1034px; left: 0px; top: 0px; background: #515151;">
+<div class="bg-gray-600 space-y-10 top-0 left-0 w-auto h-auto absolute">
     <div class="m-2 p-4 flex items-center">
         <img class="h-10 w-15" src='../../images/Logo.PNG'>
-        <h1 class="text-white text-4xl font-sans-roboto ">JASPER</h1>
+        <h1 class="text-white text-4xl font-sans-roboto font-bold">JASPER</h1>
     </div>
     <div class="space-y-4">
         <div class="m-2 p-4 hover:bg-purple-400">

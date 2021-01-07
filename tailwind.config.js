@@ -15,6 +15,9 @@ module.exports = {
                 400: '7B84DB',
             },
             white: colors.white,
+            gray: {
+                600: '515151',
+            },
         }
     },
 
