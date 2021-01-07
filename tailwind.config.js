@@ -9,16 +9,13 @@ module.exports = {
             fontFamily: {
                 sans: ['Roboto', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+              jasper: {
+                purple: '7B84DB',
+                gray: '515151',
+              }
+            }
         },
-        colors: {
-            purple: {
-                400: '7B84DB',
-            },
-            white: colors.white,
-            gray: {
-                600: '515151',
-            },
-        }
     },
 
     variants: {
