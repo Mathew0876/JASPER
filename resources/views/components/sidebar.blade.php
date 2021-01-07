@@ -1,6 +1,5 @@
-<!--Sidebar button-->
 <!--Sidebar-->
-<div class="bg-gray-600 space-y-10 top-0 left-0 w-auto h-full absolute">
+<div class="bg-gray-600 space-y-10 top-0 left-0 w-80 h-screen float">
     <div class="m-2 p-4 flex items-center">
         <img class="h-10 w-15" src='../../images/Logo.PNG'>
         <h1 class="text-white text-4xl font-sans-roboto font-bold">JASPER</h1>
