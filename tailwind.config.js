@@ -11,8 +11,8 @@ module.exports = {
             },
             colors: {
               jasper: {
-                purple: '7B84DB',
-                gray: '515151',
+                purple: '#7B84DB',
+                gray: '#515151',
               }
             }
         },
