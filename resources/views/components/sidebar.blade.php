@@ -1,6 +1,11 @@
 <!--Sidebar-->
-<div class="bg-jasper-gray space-y-10 top-0 left-0 w-64 h-screen  ">
+<div class="bg-jasper-gray space-y-10 top-0 left-0 w-64 h-full min-h-screen flex-none">
     <div class="space-y-4">
+        <div class="p-4 hover:bg-jasper-purple">
+            <h2 class = "text-center">
+                <a class="text-white text-lg font-sans-roboto align-middle">Dashboard</a> 
+            </h2>
+        </div>
         <div class="p-4 hover:bg-jasper-purple">
             <h2 class = "text-center">
                 <a class="text-white text-lg font-sans-roboto align-middle">Requirements</a> 

@@ -25,10 +25,10 @@
                     @include('layouts.Navigation')
                 </div>
             </header>
-
             <!-- Page Content -->
-            <main>
-                @include('components.Sidebar')
+            <main class="flex">
+               @include('components.Sidebar')
+               <div>Insert Content Here</div> 
             </main>
         
     </body>
