@@ -21,7 +21,7 @@
         
             <!-- Page Heading -->
             <header class="bg-jasper-purple shadow">
-                <div class=" mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class=" mx-auto">
                     @include('layouts.Navigation')
                 </div>
             </header>
