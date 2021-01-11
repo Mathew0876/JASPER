@@ -1,21 +1,9 @@
-<nav x-data="{ open: false }" class="">
+<nav x-data="{ open: false }" class="bg-jasper-purple">
     <!-- Primary Navigation Menu -->
     <div class="mx-auto">
         <div class="flex justify-between">
-            <div class="flex-shrink-0 flex justify-center items-center w-64 py-6 bg-jasper-gray">
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    <!-- Logo -->
-                    <img class="h-10 w-15" src='../../images/Logo.PNG'>
-                    <h1 class="text-white text-4xl font-sans-roboto font-bold">JASPER</h1>
-                    <!-- Navigation Links -->
-                    <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div> -->
-                </x-nav-link>
-            </div>
-            <div class="relative m-auto mr-2 text-gray-600">
+
+            <div class="relative m-auto mr-2 ml-4 text-gray-600 justify-left">
                 <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" size="50" type="search" name="search" placeholder="Search JASPER">
                 <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
                     <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
@@ -69,7 +57,7 @@
             </div>
 
             <!-- Hamburger -->
-            <!-- <div class="-mr-2 flex items-center sm:hidden">
+            <!--<div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -81,15 +69,15 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <!-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-        </div> -->
+        </div>
 
     <!-- Responsive Settings Options -->
-    <!-- <div class="pt-4 pb-1 border-t border-gray-200">
+    <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="flex-shrink-0">
                     <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,9 +91,9 @@
                 </div>
             </div>
 
-            <div class="mt-3 space-y-1"> -->
+            <div class="mt-3 space-y-1">
     <!-- Authentication -->
-    <!-- <form method="POST" action="{{ route('logout') }}">
+    <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
@@ -115,6 +103,6 @@
                     </x-responsive-nav-link>
                 </form>
             </div>
-        </div> -->
+        </div>
     </div>
 </nav>
