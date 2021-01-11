@@ -28,7 +28,7 @@
             <!-- Page Content -->
             <main class="flex">
                @include('components.Sidebar')
-               <div>Insert Content Here</div> 
+               @yield('content')
             </main>
         
     </body>

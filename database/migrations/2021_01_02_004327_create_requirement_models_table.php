@@ -15,7 +15,8 @@ class CreateRequirementModelsTable extends Migration
     {
         Schema::create('requirement_models', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('user_id');
+            $table->foreignId('owner');
+            $table->foreignId('assigned_to');
             $table->string('stride_category');
             $table->string('title');
             $table->string('description');
