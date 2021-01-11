@@ -4,12 +4,15 @@ namespace Tests\Feature;
 
 use App\Models\RequirementModel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RequirementModelTest extends TestCase
 {
     use RefreshDatabase;
+    use DatabaseMigrations;
+    
     /**
      * A basic feature test example.
      *

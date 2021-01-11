@@ -9,8 +9,11 @@ class RequirementModel extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    
     protected $fillable = [
-        //'user_id',
+        'owner',
+        'assigned_to',
         'stride_category',
         'title',
         'description',
