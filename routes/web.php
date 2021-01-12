@@ -25,4 +25,8 @@ Route::get('/add', function () {
 Route::post('/add', [RequirementModelController::class, 'store'])
 ->middleware(['auth'])->name('requirementModelController.store');
 
+Route::get('/requirements', function () {
+    return view('requirements');
+})->middleware(['auth'])->name('requirements');
+
 require __DIR__.'/auth.php';

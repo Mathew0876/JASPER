@@ -2,9 +2,9 @@
 
 @php
 $classes = ($active ?? false)
-            ? 'inline-flex items-center text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-            : 'inline-flex items-center text-sm font-medium leading-5 text-gray-500
-            hover:text-gray-700 focus:outline-none focus:text-gray-700  transition duration-150 ease-in-out';
+            ? 'flex justify-center p-4 text-lg font-sans-roboto text-white focus:outline-none transition duration-150 ease-in-out bg-jasper-purple no-underline'
+            : 'flex justify-center p-4 text-lg font-sans-roboto text-white
+            hover:bg-jasper-purple focus:outline-none transition duration-150 ease-in-out no-underline';
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
