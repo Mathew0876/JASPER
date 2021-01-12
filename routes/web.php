@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequirementModelController;
 use App\Models\User;
+use App\Models\RequirementModel;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,7 +30,7 @@ Route::post('/add', [RequirementModelController::class, 'store'])
 ->middleware(['auth'])->name('requirementModelController.store');
 
 Route::get('/requirements', function () {
-    return view('requirements');
+    return view('requirements', ['requirements'=>RequirementModel::all()]);
 })->middleware(['auth'])->name('requirements');
 
 require __DIR__.'/auth.php';
