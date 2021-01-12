@@ -23,8 +23,8 @@ class RequirementModelFactory extends Factory
     public function definition()
     {
         return [
-            'owner' => User::all()->random()->id,
-            'assigned_to' =>  User::all()->random()->id,
+            'owner' => User::factory(),
+            'assigned_to' =>  User::factory(),
             'stride_category' => $this->faker->word,
             'title' => $this->faker->sentence,
             'description' => $this->faker->text,

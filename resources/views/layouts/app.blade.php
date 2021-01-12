@@ -28,7 +28,7 @@
             @include('layouts.Navigation')
             <main class="overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="container mx-auto px-6 py-8">
-                    <h1>Insert Content</h1>
+                    @yield('content')
                 </div>
             </main>
         </div>
