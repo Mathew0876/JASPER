@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequirementModelController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +22,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/add', function () {
-    return view('add');
+    return view('add', ['users'=>User::all()->except([Auth::user()->id])]);
 })->middleware(['auth'])->name('add');
 
 Route::post('/add', [RequirementModelController::class, 'store'])

@@ -19,9 +19,9 @@
                 </label>
                 <div class="relative">
                     <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="priority" name="priority">
-                        <option>Low</option>
-                        <option>Medium</option>
-                        <option>High</option>
+                        <option value='1'>Low</option>
+                        <option value='2'>Medium</option>
+                        <option value='3'>High</option>
                     </select>
                 </div>
             </div>
@@ -44,6 +44,9 @@
                 <div class="relative">
                     <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="assign" name="assign">
                         <option value='{{Auth::user()->id}}'> {{ Auth::user()->name }}</option>
+                        @foreach($users as $user)
+                            <option value='{{$user->id}}'> {{ $user->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
