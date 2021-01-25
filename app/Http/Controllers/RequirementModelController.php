@@ -25,10 +25,10 @@ class RequirementModelController extends Controller
             'title' => $request->title,//('title'),
             'description' => $request->description,//('description'),
             'priority' => $request->priority,//('priority'),
-            'state' => '0',
-
-            // temp
-            'stride_category' => 'test',
+            'state' => 'Not Started',
+            'CIAAA_category' => $request->category,
+            
+            //test
             'mitigations' => 'test',
         ]);
         

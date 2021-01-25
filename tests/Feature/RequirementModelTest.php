@@ -39,7 +39,7 @@ class RequirementModelTest extends TestCase
     {
         // create a custom requirement to test with
         $requirement = RequirementModel::factory()->create([
-            'stride_category' => 'spoofing',
+            'CIAAA_category' => 'spoofing',
             'title' => 'The Title',
             'priority' => 2,
             'state' => false,    
@@ -47,7 +47,7 @@ class RequirementModelTest extends TestCase
     
         $requirementTest = RequirementModel::find($requirement->id);
         $this->assertEquals('The Title', $requirementTest->title);
-        $this->assertEquals('spoofing', $requirementTest->stride_category);
+        $this->assertEquals('spoofing', $requirementTest->CIAAA_category);
         $this->assertEquals(2, $requirementTest->priority);
     }
 }

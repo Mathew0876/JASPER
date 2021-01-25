@@ -25,12 +25,12 @@ class RequirementModelFactory extends Factory
         return [
             'owner' => User::factory(),
             'assigned_to' =>  User::factory(),
-            'stride_category' => $this->faker->word,
+            'CIAAA_category' => $this->faker->word,
             'title' => $this->faker->sentence,
             'description' => $this->faker->text,
             'mitigations' => $this->faker->text,
             'priority' => $this->faker->randomDigitNot(5),
-            'state' => $this->faker->boolean,    
+            'state' => $this->faker->text,    
         ];
     }
 }

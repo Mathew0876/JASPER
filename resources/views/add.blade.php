@@ -39,6 +39,21 @@
             
             <div class="md:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="assign">
+                Cybersecurity Category
+                </label>
+                <div class="relative">
+                    <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="category" name="category">
+                        <option>Confidentiality</option>
+                        <option>Integrity</option>
+                        <option>Authenticity</option>
+                        <option>Availability</option>
+                        <option>Accountability</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="assign">
                     Assign to
                 </label>
                 <div class="relative">

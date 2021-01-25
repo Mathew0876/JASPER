@@ -17,7 +17,7 @@ class CreateRequirementModelsTable extends Migration
             $table->id();
             $table->foreignId('owner');
             $table->foreignId('assigned_to');
-            $table->string('stride_category');
+            $table->string('CIAAA_category');
             $table->string('title');
             $table->string('description');
             $table->string('mitigations');

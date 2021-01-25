@@ -12,6 +12,7 @@
           <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Title</th>
           <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Priority</th>
           <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Status</th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Category</th>
           <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Assigned To</th>
         </tr>
     </thread>
@@ -36,6 +37,11 @@
         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
             <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->state }}
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
+                {{ $requirement->CIAAA_category }}
             </div>
         </td>
         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
