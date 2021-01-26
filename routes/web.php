@@ -39,4 +39,8 @@ Route::get('/view-requirement/{id}', function ($id) {
     return view('view-requirement', ['viewRequirement'=>RequirementModel::find($id)]);
 })->middleware(['auth'])->name('view-requirement');
 
+Route::get('/import', function () {
+  return view('import');
+})->middleware(['auth'])->name('import');
+
 require __DIR__.'/auth.php';

@@ -19,13 +19,10 @@
                 {{ __('Requirements') }}
             </x-nav-link>
 
-            <a class="">
-                <div class="p-4 hover:bg-jasper-purple text-center">
-                    <h2 class="text-white text-lg font-sans-roboto align-middle">
-                        Import
-                    </h2>
-                </div>
-            </a>
+            <x-nav-link :href="route('import')" :active="request()->routeIs('import')">
+                {{ __('Import') }}
+            </x-nav-link>
+            
             <a class="">
                 <div class="p-4 hover:bg-jasper-purple text-center">
                     <h2 class="text-white text-lg font-sans-roboto align-middle">
