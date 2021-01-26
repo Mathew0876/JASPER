@@ -33,4 +33,8 @@ Route::get('/requirements', function () {
     return view('requirements', ['requirements'=>RequirementModel::all()]);
 })->middleware(['auth'])->name('requirements');
 
+Route::get('/view-requirement', function () {
+    return view('view-requirement');
+})->middleware(['auth'])->name('view-requirement');
+
 require __DIR__.'/auth.php';

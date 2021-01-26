@@ -1,9 +1,8 @@
 @extends('layouts/app')
 
 @section('content')
-<div>
-    <h1 class="text-gray-700 text-lg font-medium mb-4 mt-2">Requirements</h1>
-</div>
+
+<h1 class="text-gray-700 text-3xl font-medium mb-4 mt-2">Requirements</h1>
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 <table class="min-w-full">
     <thread>
@@ -18,7 +17,7 @@
     </thread>
     <tbody>
     @foreach($requirements as $requirement)
-    <tr>
+    <tr onclick="document.location = 'view-requirement'">
         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
             <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->id }}
