@@ -17,7 +17,7 @@
     </thread>
     <tbody>
     @foreach($requirements as $requirement)
-    <tr onclick="document.location = 'view-requirement'">
+    <tr onclick="document.location = 'view-requirement/{{ $requirement->id }}'">
         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
             <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->id }}

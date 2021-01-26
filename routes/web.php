@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -33,8 +35,8 @@ Route::get('/requirements', function () {
     return view('requirements', ['requirements'=>RequirementModel::all()]);
 })->middleware(['auth'])->name('requirements');
 
-Route::get('/view-requirement', function () {
-    return view('view-requirement');
+Route::get('/view-requirement/{id}', function ($id) {
+    return view('view-requirement', ['viewRequirement'=>RequirementModel::find($id)]);
 })->middleware(['auth'])->name('view-requirement');
 
 require __DIR__.'/auth.php';

@@ -5,21 +5,21 @@
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
     <div class="flex">
         <h2 class="flex-1">
-            Requirement ID: 
-        </h2>
+            Requirement ID: {{$viewRequirement->id}}
+
         <h2 class="flex-1">
-            Title:
-        </h2>
-        <h2 class="flex-1">
-            Status
+            Status: {{$viewRequirement->state}}
         </h2>
     </div>
+    <h2 class="flex-1">
+            Title: {{$viewRequirement->title}}
+        </h2>
     <div class="flex">
         <h2 class="flex-1">
             Assign to:
         </h2>
         <h2 class="flex-1">
-            Stride Category:
+            Stride Category: {{$viewRequirement->CIAAA_category}}
         </h2>
     </div>
     <div>
