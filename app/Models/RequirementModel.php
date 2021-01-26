@@ -20,5 +20,6 @@ class RequirementModel extends Model
         'mitigations',
         'priority',
         'state',
+        'file',
     ];
 }

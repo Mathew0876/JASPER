@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequirementModelController;
+use App\Http\Controllers\ImportController;
 use App\Models\User;
 use App\Models\RequirementModel;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,5 +41,8 @@ Route::get('/view-requirement/{id}', function ($id) {
 Route::get('/import', function () {
   return view('import');
 })->middleware(['auth'])->name('import');
+
+Route::post('/import', [ImportController::class, 'uploadFile'])
+->middleware(['auth'])->name('importController.uploadFile');
 
 require __DIR__.'/auth.php';
