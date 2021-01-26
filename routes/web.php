@@ -24,12 +24,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/add', function () {
-    return view('add', ['users'=>User::all()->except([Auth::user()->id])]);
+Route::get('/add/{id?}', function ($id = null) {
+    return view('add', ['users'=>User::all()->except([Auth::user()->id]),
+                        'requirement'=>RequirementModel::find($id)]);
 })->middleware(['auth'])->name('add');
 
 Route::post('/add', [RequirementModelController::class, 'store'])
 ->middleware(['auth'])->name('requirementModelController.store');
+
+Route::post('/add/{id}', [RequirementModelController::class, 'update'])
+->middleware(['auth'])->name('requirementModelController.update');
 
 Route::get('/requirements', function () {
     return view('requirements', ['requirements'=>RequirementModel::all()]);

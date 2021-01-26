@@ -5,7 +5,9 @@
     <h1 class="flex-1 text-gray-700 text-3xl font-medium mb-4 mt-2">Requirement ID - {{$viewRequirement->id}}</h1>
     <div class="flex-none mb-4 mt-2">
         <x-button class="mx- object-left" style="text-transform: none;">
+        <a href="/add/{{$viewRequirement->id}}">
             {{ ('Edit Requirement') }}
+            </a>
         </x-button>
     </div>
 </div>
