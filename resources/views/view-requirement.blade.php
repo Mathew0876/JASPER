@@ -1,31 +1,51 @@
 @extends('layouts/app')
 
 @section('content')
-<h1 class="text-gray-700 text-3xl font-medium mb-4 mt-2">View Requirement</h1>
+<div class="flex">
+    <h1 class="flex-1 text-gray-700 text-3xl font-medium mb-4 mt-2">Requirement ID - {{$viewRequirement->id}}</h1>
+    <div class="flex-none mb-4 mt-2">
+        <x-button class="mx- object-left" style="text-transform: none;">
+            {{ ('Edit Requirement') }}
+        </x-button>
+    </div>
+</div>
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
-    <div class="flex">
-        <h2 class="flex-1">
-            Requirement ID: {{$viewRequirement->id}}
-
-        <h2 class="flex-1">
-            Status: {{$viewRequirement->state}}
-        </h2>
-    </div>
-    <h2 class="flex-1">
-            Title: {{$viewRequirement->title}}
-        </h2>
-    <div class="flex">
-        <h2 class="flex-1">
-            Assign to:
-        </h2>
-        <h2 class="flex-1">
-            Stride Category: {{$viewRequirement->CIAAA_category}}
-        </h2>
-    </div>
     <div>
-        Description
+        <h2 class="text-gray-700 text-xl font-bold mb-4 mt-2">{{$viewRequirement->title}}</h2>
     </div>
-    
+    <div class="flex mx-4 my-2">
+        <h2 class="flex-none text-gray-600 text-l font-medium p-2">Assigned to</h2>
+        <div class="flex-1 p-2">
+            {{ App\Models\User::find($viewRequirement->assigned_to)->name }}
+        </div>
+    </div>
+    <div class="flex mx-4 my-2">
+        <div class="flex flex-1 mr-2">
+            <h2 class="flex-none text-gray-600 text-l font-medium p-2">Stride Category</h2>
+            <div class="flex-1 p-2">
+                {{$viewRequirement->CIAAA_category}}
+            </div>
+        </div>
+        <div class="flex flex-1 ml-2">
+            <h2 class="flex-none text-gray-600 text-l font-medium p-2">Status</h2>
+            <div class="flex-1 p-2">
+                {{$viewRequirement->state}}
+            </div>
+        </div>
+    </div>
+    <div class="mx-4 my-2">
+        <h2 class="text-gray-600 text-l font-medium p-2">Mitigation Strategy</h2>
+        <div class="p-2 m-4">
+            To-DO
+        </div>
+    </div>
+    <div class="mx-4 my-2">
+        <h2 class="text-gray-600 text-l font-medium p-2">Description</h2>
+        <div class="p-2 m-4">
+            {{$viewRequirement->description}}
+        </div>
+    </div>
+
 </div>
 
 @endsection
