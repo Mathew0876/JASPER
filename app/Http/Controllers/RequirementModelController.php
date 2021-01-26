@@ -34,4 +34,27 @@ class RequirementModelController extends Controller
         
         return redirect('/dashboard');
     }
+
+    public function update(Request $request)
+    {
+        // todo add validation 
+        // $attributes = $request->validate([
+        //     'assign' => 'required',
+        //     'title' => 'required', //check length
+        //     'description' => 'required',
+        //     'priority' => 'required',
+        //     'state' => '0',
+        // ]);         
+        $req = RequirementModel::find($request->id);
+        $req->title = $request->title;
+        $req->description = $request->description;//('description'),
+        $req->assigned_to = $request->assign;
+        $req->priority = $request->priority;//('priority'),
+        $req->state = 'Not Started';
+        $req->CIAAA_category = $request->category;
+        
+        $req->save();
+        
+        return redirect('/dashboard');
+    }
 }
