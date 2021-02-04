@@ -19,6 +19,14 @@
                 {{ __('Requirements') }}
             </x-nav-link>
 
+            <x-nav-link :href="route('documents')" :active="request()->routeIs('documents')">
+                {{ __('Documents') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('traceability')" :active="request()->routeIs('traceability')">
+                {{ __('Traceability') }}
+            </x-nav-link>
+
             <x-nav-link :href="route('import')" :active="request()->routeIs('import')">
                 {{ __('Import') }}
             </x-nav-link>

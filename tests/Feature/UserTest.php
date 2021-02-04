@@ -11,7 +11,7 @@ use Tests\TestCase;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
-    //use DatabaseMigrations;
+    use DatabaseMigrations;
 
     /**
      * A basic feature test example.

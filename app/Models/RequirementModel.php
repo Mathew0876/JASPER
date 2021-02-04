@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Documents;
 
 class RequirementModel extends Model
 {
@@ -22,4 +23,8 @@ class RequirementModel extends Model
         'state',
         'file',
     ];
+
+    public function documents(){
+        return $this->belongsToMany(Documents::class)->withPivot('backwards');
+    }
 }

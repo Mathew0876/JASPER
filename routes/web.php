@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DocumentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequirementModelController;
 use App\Http\Controllers\ImportController;
+use App\Models\Documents;
 use App\Models\User;
 use App\Models\RequirementModel;
 use Illuminate\Support\Facades\Auth;
@@ -48,5 +50,20 @@ Route::get('/import', function () {
 
 Route::post('/import', [ImportController::class, 'uploadFile'])
 ->middleware(['auth'])->name('importController.uploadFile');
+
+Route::get('/documents', function () {
+    return view('documents', ['docs'=>Documents::all()]);
+})->middleware(['auth'])->name('documents');
+
+Route::post('/documents', [DocumentsController::class, 'addDoc'])
+->middleware(['auth'])->name('documentsController.addDoc');
+
+Route::get('/traceability', function () {
+    return view('traceability', ['docs'=>Documents::all(), 'reqs'=>RequirementModel::all()]);
+})->middleware(['auth'])->name('traceability');
+
+Route::post('/traceability', [DocumentsController::class, 'addLink'])
+->middleware(['auth'])->name('documentsController.addLink');
+
 
 require __DIR__.'/auth.php';
