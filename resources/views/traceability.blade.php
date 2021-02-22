@@ -5,7 +5,7 @@
 <h1 class="text-gray-700 text-3xl font-medium mb-4 mt-2">Add Traceability Link</h1>
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
 
-    <form method="POST" action="{{route('documentsController.addLink')}}">
+    <form method="POST" action="traceability/add">
         @csrf
         @if ($msg = Session::get('success'))
         <div class="alert alert-success">
@@ -93,6 +93,18 @@
                         @foreach( $doc->requirementModel()->where('backwards', false)->get() as $req)
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-green-800">
                             {{ $req->title }}
+                            <form method="POST" action="traceability/delete">
+                                @csrf
+                                <input type="text" name="docId" value='{{ $doc->id }}' hidden>
+                                <input type="text" name="reqId" value='{{ $req->id }}' hidden>
+
+                                <button type="submit" class="" onclick="return confirm('Are you sure you want delete this link?')">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
                         </span>
                         @endforeach
                     </x-table-col>
@@ -100,6 +112,18 @@
                         @foreach( $doc->requirementModel()->where('backwards', true)->get() as $req)
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-green-800">
                             {{ $req->title }}
+                            <form method="POST" action="traceability/delete">
+                                @csrf
+                                <input type="text" name="docId" value='{{ $doc->id }}' hidden>
+                                <input type="text" name="reqId" value='{{ $req->id }}' hidden>
+
+                                <button type="submit" class="" onclick="return confirm('Are you sure you want delete this link?')">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
                         </span>
 
                         @endforeach

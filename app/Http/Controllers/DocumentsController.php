@@ -13,7 +13,15 @@ class DocumentsController extends Controller
         ]);
 
         return back()
-          ->with('success', 'Document has been added successfully.');
+        ->with('successAdd', 'Document has been added successfully.');
+    }
+
+    public function deleteDoc(Request $request) {
+
+        Documents::destroy($request->docId);
+
+        return back()
+          ->with('successDelete', 'Document has been deleted successfully.');
     }
 
     public function addLink(Request $request) {
@@ -22,5 +30,11 @@ class DocumentsController extends Controller
         $doc->RequirementModel()->attach($request->reqId, array('backwards' => $backwards));
         return back()
           ->with('success', 'Traceability link has been added successfully.');
+    }
+
+    public function deleteLink(Request $request){
+        $doc = Documents::find($request->docId);
+        $doc->RequirementModel()->detach($request->reqId);
+        return back();
     }
 }
