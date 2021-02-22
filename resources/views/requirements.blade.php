@@ -35,7 +35,7 @@
                 {{ $requirement->CIAAA_category }}
         </x-table-col>
         <x-table-col>
-                {{ App\Models\User::find($requirement->assigned_to)->name }}
+                {{ App\Models\User::find($requirement->assigned_to)->name ?? null}}
         </x-table-col>
     </tr>
     @endforeach

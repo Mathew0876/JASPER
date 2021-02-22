@@ -16,13 +16,13 @@ class CreateRequirementModelsTable extends Migration
         Schema::create('requirement_models', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner');
-            $table->foreignId('assigned_to');
-            $table->string('CIAAA_category');
+            $table->foreignId('assigned_to')->nullable();
+            $table->string('stride_category');
             $table->string('title');
-            $table->string('description');
-            $table->string('mitigations');
+            $table->string('description')->nullable();
+            $table->string('mitigations')->nullable();
             $table->string('priority');
-            $table->string('state');
+            $table->string('state')->default('Not Started');
             $table->timestamps();
         });
     }

@@ -21,7 +21,6 @@ class RequirementModel extends Model
         'mitigations',
         'priority',
         'state',
-        'file',
     ];
 
     public function documents(){

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RequirementModel;
+use Storage;
+use Auth;
 
 class ImportController extends Controller
 {
@@ -16,13 +18,41 @@ class ImportController extends Controller
           $name = $request->file->getClientOriginalName() . '_' . time();
           $filePath = $request->file('file')->storeAs('uploads', $name, 'public');
           
-          // Parsing magic - TODO
-          // $model = new RequirementModel
-          // $model->stride_category
-          // $model->title 
-          // etc.
-          // $model->file = '/storage/' . $filePath;
-          // $model->save();
+          // Get json data from storage
+          $fileData = Storage::disk('public')->get($filePath);
+          $json = json_decode($fileData, true);
+
+          // TODO - progress bar
+          // Parse threat model json
+          $diagrams= $json['detail']['diagrams'];
+          foreach ($diagrams as $diagram) {
+            $cells = $diagram['diagramJson']['cells'];
+            foreach($cells as $cell) {
+              if(array_key_exists('threats', $cell)) {
+                $threats = $cell['threats'];
+                foreach($threats as $threat) {
+                  // Debug - print file contents
+                  if ($fp = fopen("/tmp/TEST", "w")) {
+                    fwrite($fp, print_r($threat, TRUE));
+                    fclose($fp);
+                  }
+                  
+                  // Create requirement
+                  $model = new RequirementModel();
+                  $model->owner = Auth::getUser()->id;
+                  $model->stride_category = $threat['type'];
+                  $model->title = $threat['title'];
+                  $model->description = $threat['description'];
+                  $model->priority = $threat['severity'];
+                  $model->state = $threat['status'];
+                  $model->save();
+
+                  // Parse requirements map for matching keywords
+                  // Parse database for requirements with matching stride category
+                }
+              }
+            }
+          }
 
           return back()
           ->with('success', 'Requirements have been imported successfully.')
