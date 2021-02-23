@@ -17,7 +17,7 @@ class CreateRequirementModelsTable extends Migration
             $table->id();
             $table->foreignId('owner');
             $table->foreignId('assigned_to')->nullable();
-            $table->string('stride_category');
+            $table->string('ciaaa_category');
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('mitigations')->nullable();

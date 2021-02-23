@@ -13,7 +13,7 @@ class RequirementModelController extends Controller
         $request->validate([
             'owner' => 'required',
             'assigned_to' => 'nullable',
-            'stride_category' => 'required',
+            'ciaaa_category' => 'required',
             'title' => 'required', // check length
             'description' => 'nullable',
             'mitigations' => 'nullable',
@@ -24,7 +24,7 @@ class RequirementModelController extends Controller
         RequirementModel::factory()->create([
             'owner' => auth()->id(),
             //'assigned_to' => $request->assign,
-            'stride_category' => $request->stride_category,
+            'ciaaa_category' => $request->ciaaa_category,
             'title' => $request->title,//('title'),
             'description' => $request->description,//('description'),
             'mitigations' => 'test',
@@ -51,7 +51,7 @@ class RequirementModelController extends Controller
         $req->assigned_to = $request->assign;
         $req->priority = $request->priority;//('priority'),
         $req->state = 'Not Started';
-        $req->stride_category = $request->stride_category;
+        $req->ciaaa_category = $request->ciaaa_category;
         
         $req->save();
         

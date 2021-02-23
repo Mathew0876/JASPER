@@ -7,36 +7,47 @@
 <table class="min-w-full">
     <thread>
         <tr>
-          <x-th> {{ __('Req. ID') }} </x-th>
-          <x-th> {{ __('Title') }} </x-th>
-          <x-th> {{ __('Priority') }} </x-th>
-          <x-th> {{ __('Status') }} </x-th>
-          <x-th> {{ __('Category') }} </x-th>
-          <x-th> {{ __('Assigned To') }} </x-th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Req. #</th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Title</th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Priority</th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Status</th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Category</th>
+          <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Assigned To</th>
         </tr>
     </thread>
     <tbody>
     @foreach($requirements as $requirement)
-    <tr class="hover:bg-gray-200" 
-    onclick="document.location = 'view-requirement/{{ $requirement->id }}'">
-        <x-table-col>
+    <tr onclick="document.location = 'view-requirement/{{ $requirement->id }}'">
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->id }}
-        </x-table-col>
-        <x-table-col>
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->title }}
-        </x-table-col>
-        <x-table-col>
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->priority }}
-        </x-table-col>
-        <x-table-col>
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
                 {{ $requirement->state }}
-        </x-table-col>
-        <x-table-col>
-                {{ $requirement->CIAAA_category }}
-        </x-table-col>
-        <x-table-col>
-                {{ App\Models\User::find($requirement->assigned_to)->name ?? null}}
-        </x-table-col>
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
+                {{ $requirement->ciaaa_category }}
+            </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <div class="text-sm leading-5 text-gray-900">
+                {{ App\Models\User::find($requirement->assigned_to)->name ?? null }}
+            </div>
+        </td>
     </tr>
     @endforeach
     </tbody>

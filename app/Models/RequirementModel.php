@@ -15,7 +15,7 @@ class RequirementModel extends Model
     protected $fillable = [
         'owner',
         'assigned_to',
-        'stride_category',
+        'ciaaa_category',
         'title',
         'description',
         'mitigations',

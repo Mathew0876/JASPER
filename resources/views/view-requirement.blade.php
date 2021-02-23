@@ -18,14 +18,14 @@
     <div class="flex mx-4 my-2">
         <h2 class="flex-none text-gray-600 text-l font-medium p-2">Assigned to</h2>
         <div class="flex-1 p-2">
-            {{ App\Models\User::find($viewRequirement->assigned_to)->name }}
+            {{ App\Models\User::find($viewRequirement->assigned_to)->name ?? null }}
         </div>
     </div>
     <div class="flex mx-4 my-2">
         <div class="flex flex-1 mr-2">
             <h2 class="flex-none text-gray-600 text-l font-medium p-2">Stride Category</h2>
             <div class="flex-1 p-2">
-                {{$viewRequirement->CIAAA_category}}
+                {{$viewRequirement->ciaaa_category}}
             </div>
         </div>
         <div class="flex flex-1 ml-2">

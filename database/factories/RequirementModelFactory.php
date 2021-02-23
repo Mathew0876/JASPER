@@ -25,7 +25,7 @@ class RequirementModelFactory extends Factory
         return [
             'owner' => User::factory(),
             'assigned_to' =>  User::factory(),
-            'CIAAA_category' => $this->faker->word,
+            'ciaaa_category' => $this->faker->word,
             'title' => $this->faker->sentence(12),
             'description' => $this->faker->text,
             'mitigations' => $this->faker->text,
