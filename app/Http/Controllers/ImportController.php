@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RequirementModel;
+use App\Models\RequirementMapping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,20 +33,30 @@ class ImportController extends Controller
           if (array_key_exists('threats', $cell)) {
             $threats = $cell['threats'];
             foreach ($threats as $threat) {
+
+              // Get threat information
+              $ciaaa_category = $this->strideMapping($threat['type']);
+              $description = $threat['description'];
+              $priority = $threat['severity'];
+              $state = $threat['status'];
+
+              /* Parse all requirements within category for matching keywords
+              $requirements = RequirementMapping::where('ciaaa_category', '=', $ciaaa_category)->all();
+
               // Debug - print file contents
               if ($fp = fopen("/tmp/TEST", "w")) {
-                fwrite($fp, print_r($threat, TRUE));
+                fwrite($fp, print_r($requirements, TRUE));
                 fclose($fp);
-              }
+              }*/
 
               // Create requirement
               $model = new RequirementModel();
               $model->owner = Auth::getUser()->id;
-              $model->ciaaa_category = $this->strideMapping($threat['type']);
-              $model->title = $threat['title'];
-              $model->description = $threat['description'];
-              $model->priority = $threat['severity'];
-              $model->state = $threat['status'];
+              $model->ciaaa_category = $ciaaa_category;
+              $model->title = $threat['title']; // Requirement model
+              $model->description = $description;
+              $model->priority = $priority;
+              $model->state = $state;
               $model->save();
 
               // Parse requirements map for matching keywords

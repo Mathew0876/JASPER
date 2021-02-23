@@ -3,52 +3,31 @@
 @section('content')
 <h1 class="text-gray-700 text-3xl font-medium mb-4 mt-2">Dashboard</h1>
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full h-96">
-    <h2 class="text-2xl font-medium">My Requirements</h2>
-    <div class="overflow-auto">
+    <h2 class="text-2xl font-medium"> {{ Auth::user()->name }} 's Requirements</h2>
+    <div class="overflow-auto p-2">
         <table class="min-w-full">
             <thread>
                 <tr>
-                    <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Req. #</th>
-                    <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Title</th>
-                    <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Priority</th>
-                    <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Status</th>
-                    <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Category</th>
-                    <th class="px-6 py-3 border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 tracking-wider">Assigned To</th>
+                    <x-th> {{ __('Req. ID') }}      </x-th>
+                    <x-th> {{ __('Title') }}        </x-th>
+                    <x-th> {{ __('Priority') }}     </x-th>
+                    <x-th> {{ __('Status') }}       </x-th>
+                    <x-th> {{ __('Category') }}     </x-th>
+                    <x-th> {{ __('Assigned To') }}  </x-th>
                 </tr>
             </thread>
             <tbody>
                 @foreach($requirements as $requirement)
-                <tr>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
-                            {{ $requirement->id }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
-                            {{ $requirement->title }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
-                            {{ $requirement->priority }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
-                            {{ $requirement->state }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
-                            {{ $requirement->ciaaa_category }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
+                <tr class="hover:bg-gray-200" 
+                    onclick="document.location = 'view-requirement/{{ $requirement->id }}'">
+                    <x-table-col> {{ $requirement->id }}                </x-table-col>
+                    <x-table-col> {{ $requirement->title }}             </x-table-col>
+                    <x-table-col> {{ $requirement->priority }}          </x-table-col>
+                    <x-table-col> {{ $requirement->state }}             </x-table-col>
+                    <x-table-col> {{ $requirement->ciaaa_category }}    </x-table-col>
+                    <x-table-col>
                             {{ App\Models\User::find($requirement->assigned_to)->name ?? null }}
-                        </div>
-                    </td>
+                    </x-table-col>
                 </tr>
                 @endforeach
             </tbody>
