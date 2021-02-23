@@ -1,9 +1,10 @@
 @extends('layouts/app')
 
 @section('content')
+
 <h1 class="text-gray-700 text-3xl font-medium mb-4 mt-2">Dashboard</h1>
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full h-96">
-    <h2 class="text-2xl font-medium"> {{ Auth::user()->name }} 's Requirements</h2>
+    <h2 class="text-2xl font-medium pb-4"> {{ Auth::user()->name }} 's Requirements</h2>
     <div class="overflow-auto p-2">
         <table class="min-w-full">
             <thread>
@@ -17,19 +18,19 @@
                 </tr>
             </thread>
             <tbody>
-                @foreach($requirements as $requirement)
-                <tr class="hover:bg-gray-200" 
-                    onclick="document.location = 'view-requirement/{{ $requirement->id }}'">
-                    <x-table-col> {{ $requirement->id }}                </x-table-col>
-                    <x-table-col> {{ $requirement->title }}             </x-table-col>
-                    <x-table-col> {{ $requirement->priority }}          </x-table-col>
-                    <x-table-col> {{ $requirement->state }}             </x-table-col>
-                    <x-table-col> {{ $requirement->ciaaa_category }}    </x-table-col>
-                    <x-table-col>
-                            {{ App\Models\User::find($requirement->assigned_to)->name ?? null }}
-                    </x-table-col>
-                </tr>
-                @endforeach
+            @foreach($requirements as $requirement)
+            <tr class="hover:bg-gray-200" 
+                onclick="document.location = 'view-requirement/{{ $requirement->id }}'">
+                <x-table-col> {{ $requirement->id }}                </x-table-col>
+                <x-table-col> {{ $requirement->title }}             </x-table-col>
+                <x-table-col> {{ $requirement->priority }}          </x-table-col>
+                <x-table-col> {{ $requirement->state }}             </x-table-col>
+                <x-table-col> {{ $requirement->ciaaa_category }}    </x-table-col>
+                <x-table-col>
+                        {{ App\Models\User::find($requirement->assigned_to)->name ?? null }}
+                </x-table-col>
+            </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

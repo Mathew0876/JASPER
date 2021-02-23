@@ -7,6 +7,8 @@ use App\Models\RequirementModel;
 use App\Models\RequirementMapping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class ImportController extends Controller
 {
@@ -25,6 +27,7 @@ class ImportController extends Controller
       $json = json_decode($fileData, true);
 
       // TODO - progress bar
+
       // Parse threat model json
       $diagrams = $json['detail']['diagrams'];
       foreach ($diagrams as $diagram) {
@@ -36,31 +39,48 @@ class ImportController extends Controller
 
               // Get threat information
               $ciaaa_category = $this->strideMapping($threat['type']);
+              $title = $threat['title'];
               $description = $threat['description'];
               $priority = $threat['severity'];
               $state = $threat['status'];
 
-              /* Parse all requirements within category for matching keywords
-              $requirements = RequirementMapping::where('ciaaa_category', '=', $ciaaa_category)->all();
+              // Parse all requirements within category for matching keywords
+              try {
+                  $requirements = DB::table('requirement_mapping')
+                      ->select('requirement_mapping.*')
+                      ->where('requirement_mapping.ciaaa_category', $ciaaa_category)
+                      ->get();
+                  
+                  // https://laravel.com/docs/8.x/eloquent-collections
+                  foreach ($requirements as $requirement) {
+                    $keywords = explode(";", $requirement->keywords);
 
-              // Debug - print file contents
-              if ($fp = fopen("/tmp/TEST", "w")) {
-                fwrite($fp, print_r($requirements, TRUE));
-                fclose($fp);
-              }*/
+                      // If keyword match exists in the threat title or description...
+                      foreach($keywords as $keyword) {
+                          $keyword = trim($keyword);
+                          if(empty($keyword)) break;
+                          if (strpos($title, $keyword) !== false || 
+                              strpos($description, $keyword) !== false) {
 
-              // Create requirement
-              $model = new RequirementModel();
-              $model->owner = Auth::getUser()->id;
-              $model->ciaaa_category = $ciaaa_category;
-              $model->title = $threat['title']; // Requirement model
-              $model->description = $description;
-              $model->priority = $priority;
-              $model->state = $state;
-              $model->save();
-
-              // Parse requirements map for matching keywords
-              // Parse database for requirements with matching stride category
+                            // Create a requirement        
+                              $model = new RequirementModel();
+                              $model->owner = Auth::getUser()->id;
+                              $model->ciaaa_category = $ciaaa_category;
+                              $model->title = $requirement->requirement; // Requirement model
+                              $model->description = $description;
+                              $model->priority = $priority;
+                              $model->state = $state;
+                              $model->save();
+                          }
+                      }
+                  }
+              } catch (ModelNotFoundException $e) {
+                  // Print error message
+                  if ($fp = fopen("/tmp/ImportController_ModelNotFoundException", "a")) {
+                    fwrite($fp, print_r($e, TRUE));
+                    fclose($fp);
+                  }
+              }
             }
           }
         }

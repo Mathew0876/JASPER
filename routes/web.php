@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/dashboard', function () {
-    return view('dashboard',['requirements'=>RequirementModel::all(),
-                             'currentUser'=>Auth::user()]);
+    return view('dashboard', ['requirements'=>RequirementModel::all()]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/add/{id?}', function ($id = null) {
