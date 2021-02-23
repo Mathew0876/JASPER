@@ -23,13 +23,13 @@ class RequirementModelController extends Controller
         
         RequirementModel::factory()->create([
             'owner' => auth()->id(),
-            //'assigned_to' => $request->assign,
+            'assigned_to' => $request->assigned_to,
             'ciaaa_category' => $request->ciaaa_category,
-            'title' => $request->title,//('title'),
-            'description' => $request->description,//('description'),
-            'mitigations' => 'test',
-            'priority' => $request->priority,//('priority'),
-            //'state' => 'Not Started', 
+            'title' => $request->title,
+            'description' => $request->description,
+            'mitigations' => $request->mitigations,
+            'priority' => $request->priority,
+            'state' => 'Not Started', // default
         ]);
         
         return redirect('/dashboard');
@@ -37,22 +37,16 @@ class RequirementModelController extends Controller
 
     public function update(Request $request)
     {
-        // todo add validation 
-        // $attributes = $request->validate([
-        //     'assign' => 'required',
-        //     'title' => 'required', //check length
-        //     'description' => 'required',
-        //     'priority' => 'required',
-        //     'state' => '0',
-        // ]);         
+        // TODO add validation 
+     
         $req = RequirementModel::find($request->id);
-        $req->title = $request->title;
-        $req->description = $request->description;//('description'),
-        $req->assigned_to = $request->assign;
-        $req->priority = $request->priority;//('priority'),
-        $req->state = 'Not Started';
+        $req->assigned_to = $request->assigned_to;
         $req->ciaaa_category = $request->ciaaa_category;
-        
+        $req->title = $request->title;
+        $req->description = $request->description;
+        $req->mitigations = $request->mitigations;
+        $req->priority = $request->priority;
+        $req->state = $request->state;
         $req->save();
         
         return redirect('/dashboard');
