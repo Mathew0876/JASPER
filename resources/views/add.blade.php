@@ -24,9 +24,9 @@
                     </label>
                     <div class="relative">
                         <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="priority" name="priority">
-                            <option value='1' @if(isset($requirement) && $requirement->priority == 1) selected @endif>Low</option>
-                            <option value='2' @if(isset($requirement) && $requirement->priority == 2) selected @endif>Medium</option>
-                            <option value='3' @if(isset($requirement) && $requirement->priority == 3) selected @endif>High</option>
+                            <option value='Low' @if(isset($requirement) && $requirement->priority == "Low") selected @endif>Low</option>
+                            <option value='Medium' @if(isset($requirement) && $requirement->priority == "Medium") selected @endif>Medium</option>
+                            <option value='High' @if(isset($requirement) && $requirement->priority == "High") selected @endif>High</option>
                         </select>
                     </div>
                 </div>
@@ -47,11 +47,13 @@
                     </label>
                     <div class="relative">
                         <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="ciaaa_category" name="ciaaa_category">
-                            <option @if(isset($requirement) && $requirement->CIAAA_category == "Confidentiality") selected @endif>Confidentiality</option>
-                            <option @if(isset($requirement) && $requirement->CIAAA_category == "Integrity") selected @endif>Integrity</option>
-                            <option @if(isset($requirement) && $requirement->CIAAA_category == "Authenticity") selected @endif>Authenticity</option>
-                            <option @if(isset($requirement) && $requirement->CIAAA_category == "Availability") selected @endif>Availability</option>
-                            <option @if(isset($requirement) && $requirement->CIAAA_category == "Accountability") selected @endif>Accountability</option>
+                            <option @if(isset($requirement) && $requirement->ciaaa_category == "Confidentiality") selected @endif>Confidentiality</option>
+                            <option @if(isset($requirement) && $requirement->ciaaa_category == "Integrity") selected @endif>Integrity</option>
+                            <option @if(isset($requirement) && $requirement->ciaaa_category == "Authenticity") selected @endif>Authenticity</option>
+                            <option @if(isset($requirement) && $requirement->ciaaa_category == "Availability") selected @endif>Availability</option>
+                            <option @if(isset($requirement) && $requirement->ciaaa_category == "Accountability") selected @endif>Accountability</option>
+                            <option @if(isset($requirement) && $requirement->ciaaa_category == "Non-Repudiation")
+                            selected @endif>Non-Repudiation</option>
                         </select>
                     </div>
                 </div>
@@ -61,7 +63,7 @@
                         Assign to
                     </label>
                     <div class="relative">
-                        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="assign" name="assign">
+                        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="assigned_to" name="assigned_to">
                             <option value='{{Auth::user()->id}}'> {{ Auth::user()->name }}</option>
                             @foreach($users as $user)
                             <option value='{{$user->id}}' @if(isset($requirement) && $requirement->assigned_to == $user->id) selected @endif> {{ $user->name }}</option>
@@ -69,7 +71,6 @@
                         </select>
                     </div>
                 </div>
-
             </div>
 
             <div class="mx-auto pt-5">
@@ -79,7 +80,6 @@
                     @else
                         {{ ('Add Requirement') }}
                     @endif
-
                 </x-button>
             </div>
 

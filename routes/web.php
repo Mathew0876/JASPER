@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/dashboard', function () {
-    return view('dashboard', ['requirements'=>RequirementModel::all()]);
+    return view('dashboard', ['requirements'=>RequirementModel::all(),
+                              'users'=>User::all()]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/add/{id?}', function ($id = null) {
@@ -35,6 +36,9 @@ Route::post('/add', [RequirementModelController::class, 'store'])
 
 Route::post('/add/{id}', [RequirementModelController::class, 'update'])
 ->middleware(['auth'])->name('requirementModelController.update');
+
+Route::get('/delete/{id}', [RequirementModelController::class, 'delete'])
+->middleware(['auth'])->name('requirementModelController.delete');
 
 Route::get('/requirements', function () {
     return view('requirements', ['requirements'=>RequirementModel::all()]);

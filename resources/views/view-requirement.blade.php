@@ -5,9 +5,14 @@
     <h1 class="flex-1 text-gray-700 text-3xl font-medium mb-4 mt-2">Requirement ID - {{$viewRequirement->id}}</h1>
     <div class="flex-none mb-4 mt-2">
         <x-button class="mx- object-left" style="text-transform: none;">
-        <a href="/add/{{$viewRequirement->id}}">
-            {{ ('Edit Requirement') }}
-            </a>
+          <a href="/add/{{$viewRequirement->id}}">
+              {{ __('Edit Requirement') }}
+          </a>
+        </x-button>
+        <x-button class="mx- object-left mt-3" style="text-transform: none;">
+          <a href="/delete/{{$viewRequirement->id}}">
+              {{ __('Delete Requirement') }}
+          </a>
         </x-button>
     </div>
 </div>
@@ -38,13 +43,13 @@
     <div class="mx-4 my-2">
         <h2 class="text-gray-600 text-l font-medium p-2">Mitigation Strategy</h2>
         <div class="p-2 m-4">
-            To-DO
+                {{ $viewRequirement->mitigation ?? null }}
         </div>
     </div>
     <div class="mx-4 my-2">
         <h2 class="text-gray-600 text-l font-medium p-2">Description</h2>
         <div class="p-2 m-4">
-            {{$viewRequirement->description}}
+                {{$viewRequirement->description}}
         </div>
     </div>
 

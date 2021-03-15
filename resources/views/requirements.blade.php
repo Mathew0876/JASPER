@@ -3,6 +3,11 @@
 @section('content')
 
 <h1 class="text-gray-700 text-3xl font-medium mb-4 mt-2">Requirements</h1>
+@if ($msg = Session::get('successEdit'))
+        <div class="alert alert-success">
+            <strong>{{ $msg }}</strong>
+        </div>
+@endif
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 <table class="min-w-full">
     <thread>

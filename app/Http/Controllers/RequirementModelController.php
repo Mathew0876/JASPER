@@ -29,10 +29,10 @@ class RequirementModelController extends Controller
             'description' => $request->description,
             'mitigations' => $request->mitigations,
             'priority' => $request->priority,
-            'state' => 'Not Started', // default
+            'state' => $request->state,
         ]);
         
-        return redirect('/dashboard');
+        return redirect('/requirements');
     }
 
     public function update(Request $request)
@@ -46,9 +46,16 @@ class RequirementModelController extends Controller
         $req->description = $request->description;
         $req->mitigations = $request->mitigations;
         $req->priority = $request->priority;
-        $req->state = $request->state;
+        $req->state = "Not Started";
         $req->save();
         
-        return redirect('/dashboard');
+        return redirect('/requirements')->with('successEdit', 'Requirement has been successfully updated.');
     }
+
+    public function delete(Request $request) {
+
+      RequirementModel::destroy($request->id);
+
+      return redirect('/requirements')->with('successDelete', 'Requirement has been deleted successfully.');
+  }
 }
