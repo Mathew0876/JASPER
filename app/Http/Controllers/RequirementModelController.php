@@ -10,16 +10,16 @@ class RequirementModelController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'owner' => 'required',
-            'assigned_to' => 'nullable',
-            'ciaaa_category' => 'required',
-            'title' => 'required', // check length
-            'description' => 'nullable',
-            'mitigations' => 'nullable',
-            'priority' => 'required',
-            'state' => 'required',
-        ]);         
+        // $request->validate([
+        //     'owner' => 'required',
+        //     'assigned_to' => 'nullable',
+        //     'ciaaa_category' => 'required',
+        //     'title' => 'required', // check length
+        //     'description' => 'nullable',
+        //     'mitigations' => 'nullable',
+        //     'priority' => 'required',
+        //     'state' => 'required',
+        // ]);         
         
         RequirementModel::factory()->create([
             'owner' => auth()->id(),

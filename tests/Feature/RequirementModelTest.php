@@ -35,11 +35,11 @@ class RequirementModelTest extends TestCase
         $this->assertDatabaseCount('requirement_models', 5);
     }
 
-    public function test_RequirementModel_properites()
+    public function test_RequirementModel_properties()
     {
         // create a custom requirement to test with
         $requirement = RequirementModel::factory()->create([
-            'CIAAA_category' => 'Availability',
+            'ciaaa_category' => 'Availability',
             'title' => 'The Title',
             'priority' => 2,
             'state' => false,    
@@ -47,7 +47,7 @@ class RequirementModelTest extends TestCase
     
         $requirementTest = RequirementModel::find($requirement->id);
         $this->assertEquals('The Title', $requirementTest->title);
-        $this->assertEquals('Availability', $requirementTest->CIAAA_category);
+        $this->assertEquals('Availability', $requirementTest->ciaaa_category);
         $this->assertEquals(2, $requirementTest->priority);
     }
 }

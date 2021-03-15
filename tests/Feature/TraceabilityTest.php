@@ -29,7 +29,7 @@ class TraceabilityTest extends TestCase
 
     public function test_Document_Requirement_Model_Backwards(){
         $requirement = RequirementModel::factory()->create([
-            'CIAAA_category' => 'Availability',
+            'ciaaa_category' => 'Availability',
             'title' => 'The Title',
             'priority' => 2,
             'state' => false,    
@@ -49,7 +49,7 @@ class TraceabilityTest extends TestCase
 
     public function test_Document_Requirement_Model_Forwards(){
         $requirement = RequirementModel::factory()->create([
-            'CIAAA_category' => 'Availability',
+            'ciaaa_category' => 'Availability',
             'title' => 'The Title',
             'priority' => 2,
             'state' => false,    

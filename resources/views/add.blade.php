@@ -46,7 +46,7 @@
                         Cybersecurity Category
                     </label>
                     <div class="relative">
-                        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="category" name="category">
+                        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="ciaaa_category" name="ciaaa_category">
                             <option @if(isset($requirement) && $requirement->CIAAA_category == "Confidentiality") selected @endif>Confidentiality</option>
                             <option @if(isset($requirement) && $requirement->CIAAA_category == "Integrity") selected @endif>Integrity</option>
                             <option @if(isset($requirement) && $requirement->CIAAA_category == "Authenticity") selected @endif>Authenticity</option>
