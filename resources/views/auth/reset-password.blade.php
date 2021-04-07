@@ -6,6 +6,11 @@
             </a>
         </x-slot>
 
+        <!-- JASPER Logo -->
+        <div class="m-2 p-4 flex justify-center items-center">
+          <img class="h-10 w-15" src='../../images/Logo.PNG'>
+          <h1 class="text-white text-4xl font-sans-roboto font-bold">JASPER</h1>
+        </div>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 

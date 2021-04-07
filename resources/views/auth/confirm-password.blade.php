@@ -6,7 +6,13 @@
             </a>
         </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <!-- JASPER Logo -->
+        <div class="m-2 p-4 flex justify-center items-center">
+          <img class="h-10 w-15" src='../../images/Logo.PNG'>
+          <h1 class="text-white text-4xl font-sans-roboto font-bold">JASPER</h1>
+        </div>
+
+        <div class="mb-4 text-sm text-gray-200">
             {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
         </div>
 
