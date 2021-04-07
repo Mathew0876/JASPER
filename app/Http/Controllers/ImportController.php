@@ -46,50 +46,65 @@ class ImportController extends Controller
               $priority = $threat['severity'];
               $state = $threat['status'];
 
+              // create a document for each threat
+              $doc = Documents::factory()->create([
+                'title' => basename($filePath) . "-" . $title
+              ]);
+
+              
               // Parse all requirements within category for matching keywords
               try {
-                  $requirements = DB::table('requirement_mapping')
-                      ->select('requirement_mapping.*')
-                      ->where('requirement_mapping.ciaaa_category', $ciaaa_category)
-                      ->get();
-                  
-                  // https://laravel.com/docs/8.x/eloquent-collections
-                  foreach ($requirements as $requirement) {
-                    $keywords = explode(";", $requirement->keywords);
+                $requirements = DB::table('requirement_mapping')
+                  ->select('requirement_mapping.*')
+                  ->where('requirement_mapping.ciaaa_category', $ciaaa_category)
+                  ->get();
 
-                      // If keyword match exists in the threat title or description...
-                      foreach($keywords as $keyword) {
-                          $keyword = trim($keyword);
-                          if(empty($keyword)) break;
-                          if (strpos($title, $keyword) !== false || 
-                              strpos($description, $keyword) !== false) {
+                // https://laravel.com/docs/8.x/eloquent-collections
+                foreach ($requirements as $requirement) {
+                  $keywords = explode(";", $requirement->keywords);
 
-                              // Create a requirement        
-                              $model = new RequirementModel();
-                              $model->owner = Auth::getUser()->id;
-                              $model->ciaaa_category = $ciaaa_category;
-                              $model->title = $requirement->requirement; // Requirement model
-                              $model->description = $description;
-                              $model->priority = $priority;
-                              $model->state = $state;
-                              $model->save();
+                  // If keyword match exists in the threat title or description...
+                  foreach ($keywords as $keyword) {
+                    $keyword = trim($keyword);
+                    if (empty($keyword)) break;
+                    if (
+                      strpos($title, $keyword) !== false ||
+                      strpos($description, $keyword) !== false
+                    ) {
 
-                              // create a document for traceability
-                              $doc = Documents::factory()->create([
-                                'title' => basename($filePath) . "-" . $title
-                              ]);
-                              // creates the link
-                              $doc->RequirementModel()->attach($model->id, array('backwards' => true));
-                    
-                          }
+                      $req = RequirementModel::where('title', $requirement->requirement)->first();
+                      // new requirement
+                      if ($req == null) {
+
+                        // Create a requirement        
+                        $model = new RequirementModel();
+                        $model->owner = Auth::getUser()->id;
+                        $model->ciaaa_category = $ciaaa_category;
+                        $model->title = $requirement->requirement; // Requirement model
+                        $model->description = $description;
+                        $model->priority = $priority;
+                        $model->state = $state;
+                        $model->save();
+
+                        $req = $model;
+
                       }
+                      
+
+                      $tempDoc = $req->documents()->where('id', $doc->id)->first();
+                      if (is_null($tempDoc)){
+                        // creates the link 
+                        $doc->RequirementModel()->attach($req->id, array('backwards' => true));   
+                      }
+                    }
                   }
+                }
               } catch (ModelNotFoundException $e) {
-                  // Print error message
-                  if ($fp = fopen("/tmp/ImportController_ModelNotFoundException", "a")) {
-                    fwrite($fp, print_r($e, TRUE));
-                    fclose($fp);
-                  }
+                // Print error message
+                if ($fp = fopen("/tmp/ImportController_ModelNotFoundException", "a")) {
+                  fwrite($fp, print_r($e, TRUE));
+                  fclose($fp);
+                }
               }
             }
           }
@@ -120,7 +135,8 @@ class ImportController extends Controller
         return 'Authorization';
       case 'information_disclosure':
         return 'Confidentiality';
-      default: return 'Unknown';
+      default:
+        return 'Unknown';
     }
   }
 }
