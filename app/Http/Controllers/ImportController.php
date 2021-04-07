@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RequirementModel;
+use App\Models\Documents;
 use App\Models\RequirementMapping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ImportController extends Controller
 {
@@ -62,7 +64,7 @@ class ImportController extends Controller
                           if (strpos($title, $keyword) !== false || 
                               strpos($description, $keyword) !== false) {
 
-                            // Create a requirement        
+                              // Create a requirement        
                               $model = new RequirementModel();
                               $model->owner = Auth::getUser()->id;
                               $model->ciaaa_category = $ciaaa_category;
@@ -71,6 +73,14 @@ class ImportController extends Controller
                               $model->priority = $priority;
                               $model->state = $state;
                               $model->save();
+
+                              // create a document for traceability
+                              $doc = Documents::factory()->create([
+                                'title' => basename($filePath) . "-" . $title
+                              ]);
+                              // creates the link
+                              $doc->RequirementModel()->attach($model->id, array('backwards' => true));
+                    
                           }
                       }
                   }
