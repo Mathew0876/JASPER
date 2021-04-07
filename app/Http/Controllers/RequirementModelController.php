@@ -46,7 +46,7 @@ class RequirementModelController extends Controller
         $req->description = $request->description;
         $req->mitigations = $request->mitigations;
         $req->priority = $request->priority;
-        $req->state = "Not Started";
+        $req->state = $request->state;
         $req->save();
         
         return redirect('/requirements')->with('successEdit', 'Requirement has been successfully updated.');

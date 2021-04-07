@@ -8,6 +8,7 @@ use App\Models\Documents;
 use App\Models\User;
 use App\Models\RequirementModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 /*

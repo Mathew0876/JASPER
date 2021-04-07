@@ -57,6 +57,9 @@
     </div>
     <div class="flex-1 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
         <h2 class="text-2xl font-medium mb-4">Completion Status</h2>
+        
+        <!--- TODO Pie Chart -->
+        
     </div>
 </div>
 
