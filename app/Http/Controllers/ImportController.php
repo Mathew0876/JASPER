@@ -46,12 +46,18 @@ class ImportController extends Controller
               $priority = $threat['severity'];
               $state = $threat['status'];
 
+              if (isset($threat['mitigation'])) {
+                $mitigations = $threat['mitigation'];
+              } else {
+                $mitigations = null;
+              }
+
               // create a document for each threat
               $doc = Documents::factory()->create([
                 'title' => basename($filePath) . "-" . $title
               ]);
 
-              
+
               // Parse all requirements within category for matching keywords
               try {
                 $requirements = DB::table('requirement_mapping')
@@ -61,42 +67,42 @@ class ImportController extends Controller
 
                 // https://laravel.com/docs/8.x/eloquent-collections
                 foreach ($requirements as $requirement) {
+                  $counter = 0;
                   $keywords = explode(";", $requirement->keywords);
 
                   // If keyword match exists in the threat title or description...
                   foreach ($keywords as $keyword) {
                     $keyword = trim($keyword);
-                    if (empty($keyword)) break;
-                    if (
-                      strpos($title, $keyword) !== false ||
-                      strpos($description, $keyword) !== false
-                    ) {
+                    if (empty($keyword)) continue;
+                    if(strpos($title, $keyword) !== false)$counter++;
+                    if(strpos($description, $keyword) !== false)$counter++;
+                    if(strpos($mitigations,$keyword) !== false)$counter++;
+                    
+                  }
+                  if ($counter == 0) continue;
+                  $req = RequirementModel::where('title', $requirement->requirement)->first();
+                  // new requirement
+                  if ($req == null) {
 
-                      $req = RequirementModel::where('title', $requirement->requirement)->first();
-                      // new requirement
-                      if ($req == null) {
+                    // Create a requirement        
+                    $model = new RequirementModel();
+                    $model->owner = Auth::getUser()->id;
+                    $model->ciaaa_category = $ciaaa_category;
+                    $model->title = $requirement->requirement; // Requirement model
+                    $model->description = $description;
+                    $model->priority = $priority;
+                    $model->state = $state;
+                    $model->mitigations = $mitigations;
+                    $model->word_match = $counter;
+                    $model->save();
 
-                        // Create a requirement        
-                        $model = new RequirementModel();
-                        $model->owner = Auth::getUser()->id;
-                        $model->ciaaa_category = $ciaaa_category;
-                        $model->title = $requirement->requirement; // Requirement model
-                        $model->description = $description;
-                        $model->priority = $priority;
-                        $model->state = $state;
-                        $model->save();
+                    $req = $model;
+                  }
 
-                        $req = $model;
-
-                      }
-                      
-
-                      $tempDoc = $req->documents()->where('id', $doc->id)->first();
-                      if (is_null($tempDoc)){
-                        // creates the link 
-                        $doc->RequirementModel()->attach($req->id, array('backwards' => true));   
-                      }
-                    }
+                  $tempDoc = $req->documents()->where('id', $doc->id)->first();
+                  if (is_null($tempDoc)) {
+                    // creates the link 
+                    $doc->RequirementModel()->attach($req->id, array('backwards' => true));
                   }
                 }
               } catch (ModelNotFoundException $e) {

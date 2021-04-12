@@ -30,6 +30,7 @@ class RequirementModelController extends Controller
             'mitigations' => $request->mitigations,
             'priority' => $request->priority,
             'state' => $request->state,
+            'word_match' => $request->word_match,
         ]);
         
         return redirect('/requirements');
@@ -47,6 +48,7 @@ class RequirementModelController extends Controller
         $req->mitigations = $request->mitigations;
         $req->priority = $request->priority;
         $req->state = $request->state;
+        $req->word_match = $request->word_match;
         $req->save();
         
         return redirect('/requirements')->with('successEdit', 'Requirement has been successfully updated.');

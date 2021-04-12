@@ -21,6 +21,7 @@ class RequirementModel extends Model
         'mitigations',
         'priority',
         'state',
+        'word_match',
     ];
 
     public function documents(){

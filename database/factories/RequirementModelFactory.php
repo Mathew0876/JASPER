@@ -30,7 +30,8 @@ class RequirementModelFactory extends Factory
             'description' => $this->faker->text,
             'mitigations' => $this->faker->text,
             'priority' => $this->faker->randomDigitNot(5),
-            'state' => $this->faker->text(20),    
+            'state' => $this->faker->text(20),
+            'word_match' => $this->faker->randomDigit(),    
         ];
     }
 }
