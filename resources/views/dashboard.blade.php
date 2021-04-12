@@ -76,8 +76,8 @@
             var options = {
                 slices: {
                   0 : {color: '#7B84DB'},
-                  1 : {color: '#A1A1A1'},
-                  2 : {color: '#5664B8'},
+                  1 : {color: '#5664B8'},
+                  2 : {color: '#A1A1A1'},
                   3 : {color: '#515151'}}
             };
             var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));

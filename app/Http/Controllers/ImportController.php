@@ -44,7 +44,8 @@ class ImportController extends Controller
               $title = $threat['title'];
               $description = $threat['description'];
               $priority = $threat['severity'];
-              $state = $threat['status'];
+              //$state = $threat['status'];
+              $state = 'Open';
 
               if (isset($threat['mitigation'])) {
                 $mitigations = $threat['mitigation'];
