@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ChartController extends Controller
 {
     // https://www.nicesnippets.com/blog/laravel-google-pie-chart-tutorial-example
-    public function buildChart(Request $request)
+    public static function buildChart()
     {
       $data = DB::table('requirement_models')
         ->select(
@@ -20,6 +20,6 @@ class ChartController extends Controller
       foreach($data as $key => $value) {
         $array[++$key] = [$value->state, $value->number];
       }
-      return $json_encode($array);
+      return json_encode($array);
     }
 }

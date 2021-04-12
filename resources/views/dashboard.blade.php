@@ -59,8 +59,30 @@
         <h2 class="text-2xl font-medium mb-4">Completion Status</h2>
         
         <!--- TODO Pie Chart -->
-        
+        <div id="pie_chart" style="width:750px; height:450px;"></div>
+
     </div>
 </div>
+
+<script type="text/javascript">
+        var analytics = <?php echo $data; ?>
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart()
+        {
+            var data = google.visualization.arrayToDataTable(analytics);
+            var options = {
+                slices: {
+                  0 : {color: '#7B84DB'},
+                  1 : {color: '#A1A1A1'},
+                  2 : {color: '#5664B8'},
+                  3 : {color: '#515151'}}
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+            chart.draw(data, options);
+        }
+</script>
 
 @endsection
