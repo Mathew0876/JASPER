@@ -1,6 +1,11 @@
 # JASPER
 ## Threat Modeling for Security Requirements Management
-<insert abstract from report and logo>
+<p align="center">
+  <img width="" height="" src="Logo.png">
+</p>
+
+The purpose of project JASPER is to generate security requirements from threat model diagrams created using the OWASP Threat Dragon Tool. The JASPER system serves as a management platform for the generated security requirements and provides tooling to further refine the requirements. The JASPER system is a stand alone application with features that include tracking completion status of requirements, user collaboration, and traceability. The target audience for the application includes engineers, security analysts, undergraduate and graduate students, and companies centered in the software security field.  The objective of this project is to streamline the elicitation and management of security requirements.
+
 
 ## Helpful links
 Checkout the wiki: https://github.com/Mathew0876/JASPER/wiki  
