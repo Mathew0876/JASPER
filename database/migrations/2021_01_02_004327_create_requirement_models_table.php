@@ -22,7 +22,8 @@ class CreateRequirementModelsTable extends Migration
             $table->string('description')->nullable();
             $table->string('mitigations')->nullable();
             $table->string('priority');
-            $table->string('state')->default('Not Started');
+            $table->string('state')->default('Open');
+            $table->string('word_match')->nullable();
             $table->timestamps();
         });
     }

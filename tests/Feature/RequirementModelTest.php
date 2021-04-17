@@ -50,4 +50,20 @@ class RequirementModelTest extends TestCase
         $this->assertEquals('Availability', $requirementTest->ciaaa_category);
         $this->assertEquals(2, $requirementTest->priority);
     }
+
+    public function test_RequirementModel_delete()
+    {
+        // create a custom requirement to test with
+        $requirement = RequirementModel::factory()->create([
+          'ciaaa_category' => 'Availability',
+          'title' => 'The Title',
+          'priority' => 2,
+          'state' => false,    
+        ]);
+
+        // delete the requirement
+        RequirementModel::destroy($requirement->id);
+        $req = RequirementModel::find($requirement->id);
+        $this->assertNull($req);
+    }
 }

@@ -6,8 +6,10 @@ use App\Http\Controllers\RequirementModelController;
 use App\Http\Controllers\ImportController;
 use App\Models\Documents;
 use App\Models\User;
+use App\Http\Controllers\ChartController;
 use App\Models\RequirementModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 /*
@@ -23,7 +25,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/dashboard', function () {
     return view('dashboard', ['requirements'=>RequirementModel::all(),
-                              'users'=>User::all()]);
+                              'users'=>User::all(),
+                              'data' =>ChartController::buildChart()]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/add/{id?}', function ($id = null) {

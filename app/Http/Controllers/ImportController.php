@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RequirementModel;
+use App\Models\Documents;
 use App\Models\RequirementMapping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ImportController extends Controller
 {
@@ -42,44 +44,74 @@ class ImportController extends Controller
               $title = $threat['title'];
               $description = $threat['description'];
               $priority = $threat['severity'];
-              $state = $threat['status'];
+              //$state = $threat['status'];
+              $state = 'Open';
+
+              if (isset($threat['mitigation'])) {
+                $mitigations = $threat['mitigation'];
+              } else {
+                $mitigations = null;
+              }
+
+              // create a document for each threat
+              $doc = Documents::factory()->create([
+                'title' => basename($filePath) . "-" . $title
+              ]);
+
 
               // Parse all requirements within category for matching keywords
               try {
-                  $requirements = DB::table('requirement_mapping')
-                      ->select('requirement_mapping.*')
-                      ->where('requirement_mapping.ciaaa_category', $ciaaa_category)
-                      ->get();
-                  
-                  // https://laravel.com/docs/8.x/eloquent-collections
-                  foreach ($requirements as $requirement) {
-                    $keywords = explode(";", $requirement->keywords);
+                $requirements = DB::table('requirement_mapping')
+                  ->select('requirement_mapping.*')
+                  ->where('requirement_mapping.ciaaa_category', $ciaaa_category)
+                  ->get();
 
-                      // If keyword match exists in the threat title or description...
-                      foreach($keywords as $keyword) {
-                          $keyword = trim($keyword);
-                          if(empty($keyword)) break;
-                          if (strpos($title, $keyword) !== false || 
-                              strpos($description, $keyword) !== false) {
+                // https://laravel.com/docs/8.x/eloquent-collections
+                foreach ($requirements as $requirement) {
+                  $counter = 0;
+                  $keywords = explode(";", $requirement->keywords);
 
-                            // Create a requirement        
-                              $model = new RequirementModel();
-                              $model->owner = Auth::getUser()->id;
-                              $model->ciaaa_category = $ciaaa_category;
-                              $model->title = $requirement->requirement; // Requirement model
-                              $model->description = $description;
-                              $model->priority = $priority;
-                              $model->state = $state;
-                              $model->save();
-                          }
-                      }
+                  // If keyword match exists in the threat title or description...
+                  foreach ($keywords as $keyword) {
+                    $keyword = trim($keyword);
+                    if (empty($keyword)) continue;
+                    if(strpos($title, $keyword) !== false)$counter++;
+                    if(strpos($description, $keyword) !== false)$counter++;
+                    if(strpos($mitigations,$keyword) !== false)$counter++;
+                    
                   }
+                  if ($counter == 0) continue;
+                  $req = RequirementModel::where('title', $requirement->requirement)->first();
+                  // new requirement
+                  if ($req == null) {
+
+                    // Create a requirement        
+                    $model = new RequirementModel();
+                    $model->owner = Auth::getUser()->id;
+                    $model->ciaaa_category = $ciaaa_category;
+                    $model->title = $requirement->requirement; // Requirement model
+                    $model->description = $description;
+                    $model->priority = $priority;
+                    $model->state = $state;
+                    $model->mitigations = $mitigations;
+                    $model->word_match = $counter;
+                    $model->save();
+
+                    $req = $model;
+                  }
+
+                  $tempDoc = $req->documents()->where('id', $doc->id)->first();
+                  if (is_null($tempDoc)) {
+                    // creates the link 
+                    $doc->RequirementModel()->attach($req->id, array('backwards' => true));
+                  }
+                }
               } catch (ModelNotFoundException $e) {
-                  // Print error message
-                  if ($fp = fopen("/tmp/ImportController_ModelNotFoundException", "a")) {
-                    fwrite($fp, print_r($e, TRUE));
-                    fclose($fp);
-                  }
+                // Print error message
+                if ($fp = fopen("/tmp/ImportController_ModelNotFoundException", "a")) {
+                  fwrite($fp, print_r($e, TRUE));
+                  fclose($fp);
+                }
               }
             }
           }
@@ -110,7 +142,8 @@ class ImportController extends Controller
         return 'Authorization';
       case 'information_disclosure':
         return 'Confidentiality';
-      default: return 'Unknown';
+      default:
+        return 'Unknown';
     }
   }
 }
